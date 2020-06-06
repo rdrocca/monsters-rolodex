@@ -21,15 +21,20 @@ class App extends React.Component {
     const res = await fetch('https://jsonplaceholder.typicode.com/users')
     const users = await res.json()
     this.setState({ monsters: users })
+
+
   }
 
   render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
+
     return (
       <div className="App">
         <input type="search"
           placeholder="search Monsters :v"
           onChange={e => this.setState({ searchField: e.target.value })} />
-        <CardList monsters={this.state.monsters} />
+        <CardList monsters={filteredMonsters} />
 
       </div>
     );
