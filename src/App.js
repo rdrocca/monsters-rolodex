@@ -16,27 +16,30 @@ class App extends React.Component {
       searchField: ''
     };
 
+    // this.handleChange = this.handleChange.bind(this);
+
   };
 
   async componentDidMount() {
     const res = await fetch('https://jsonplaceholder.typicode.com/users')
     const users = await res.json()
     this.setState({ monsters: users })
-
-
   }
 
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  }
   render() {
     const { monsters, searchField } = this.state;
     const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
 
     return (
       <div className="App">
-          <SearchBox
-            placeHolder="Search monters :vv"
-            handleChange={e => this.setState({ searchField: e.target.value })}
-          />
-         <CardList monsters={filteredMonsters} />
+        <SearchBox
+          placeHolder="Search monters :vv"
+          handleChange={this.handleChange}
+        />
+        <CardList monsters={filteredMonsters} />
 
       </div>
     );
