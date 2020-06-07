@@ -35,6 +35,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <h1>Monsters Rolodex Peru</h1>
         <SearchBox
           placeHolder="Search monters :vv"
           handleChange={this.handleChange}
